@@ -1,6 +1,19 @@
 # au3i: Among Us 3 Interpreter
 
-## Colors
+## What?
+Among Us 3 is an experience suitable for children of all ages. It can also be experienced by parents too. All you need is a device supported by us.
+
+## How?
+```
+cargo run
+```
+
+## What again?
+Among Us 3 is a "stack-based", color-based, sus-like, amogus-based interpreted "programming language", that is you have a stack, you can use command to modify the stack, and u can read and print from the terminal.
+
+Every command comes in a pair of `color` and `action`, the **Actions** section shows how actions and colors can be mixed, with `{}` substituted with a color, and `[]` substituted with a command. Yes, `DID []?` and `[1] then [2]` are the exceptions.
+
+### Colors
 | color | function |
 | --- | --- |
 | RED | identity |
@@ -17,7 +30,7 @@
 | LIME | read input from terminal |
 | IMPOSTOR | debug print the stack |
 
-## Actions
+### Actions
 | action | outcome |
 | --- | --- |
 | \{\} SUS | apply \{\} |
@@ -28,3 +41,6 @@
 | VOTE \{\} | swap the first two on the stack, then apply \{\} |
 | DID \[\]? | repeat \[\] until top is zero |
 | \[1\] THEN \[2\] | do \[1\] then do \[2\] |
+
+## Why?
+Think of the children.
