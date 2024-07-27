@@ -274,34 +274,38 @@ fn parse_question(tokens: &[Token], i: usize) -> Option<(Action, usize)> {
 // action
 fn parse_action(tokens: &[Token], i: usize) -> Option<(Action, usize)> {
     let ft = *tokens.get(i)?;
-    let st = *tokens.get(i + 1)?;
-    Some((
-        match ft {
-            Token::Color(color) => match st {
-                Token::Sus => Some(Action::Do(color)),
-                Token::Innocent => Some(Action::PopThen(color)),
-                Token::Vented => Some(Action::DupThen(color)),
-                Token::Sussy => Some(Action::RotLeftThen(color)),
+    if ft == Token::Sus || ft == Token::Sussy {
+        Some((Action::Do(Color::Red), i + 1))
+    } else {
+        let st = *tokens.get(i + 1)?;
+        Some((
+            match ft {
+                Token::Color(color) => match st {
+                    Token::Sus => Some(Action::Do(color)),
+                    Token::Innocent => Some(Action::PopThen(color)),
+                    Token::Vented => Some(Action::DupThen(color)),
+                    Token::Sussy => Some(Action::RotLeftThen(color)),
+                    _ => None,
+                },
+                Token::Vouch => {
+                    if let Token::Color(color) = st {
+                        Some(Action::RotRightThen(color))
+                    } else {
+                        None
+                    }
+                }
+                Token::Vote => {
+                    if let Token::Color(color) = st {
+                        Some(Action::SwapThen(color))
+                    } else {
+                        None
+                    }
+                }
                 _ => None,
-            },
-            Token::Vouch => {
-                if let Token::Color(color) = st {
-                    Some(Action::RotRightThen(color))
-                } else {
-                    None
-                }
-            }
-            Token::Vote => {
-                if let Token::Color(color) = st {
-                    Some(Action::SwapThen(color))
-                } else {
-                    None
-                }
-            }
-            _ => None,
-        }?,
-        i + 2,
-    ))
+            }?,
+            i + 2,
+        ))
+    }
 }
 
 fn parse(tokens: &[Token]) -> Option<Box<[Action]>> {
