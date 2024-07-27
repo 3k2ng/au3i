@@ -42,6 +42,8 @@ Every command comes in a pair of `color` and `action`, the **Actions** section s
 | DID \[\]? | repeat \[\] until top is zero |
 | \[1\] THEN \[2\] | do \[1\] then do \[2\] |
 
+Actually, another exception, you can just spam `sus` and `sussy` because why not.
+
 ## Why?
 Think of the children.
 
