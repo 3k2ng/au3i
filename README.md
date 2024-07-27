@@ -44,3 +44,6 @@ Every command comes in a pair of `color` and `action`, the **Actions** section s
 
 ## Why?
 Think of the children.
+
+## Credit
+Heavily influenced by the [Among Us programming language](https://esolangs.org/wiki/Among_Us), idk, maybe even a sequel.
