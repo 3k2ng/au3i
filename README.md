@@ -9,7 +9,7 @@ cargo run
 ```
 
 ## What again?
-Among Us 3 is a "stack-based", color-based, sus-like, amogus-based interpreted "programming language", that is you have a stack, you can use command to modify the stack, and u can read and print from the terminal.
+Among Us 3 is a "stack-based", color-based, sus-like, amogus-based interpreted "programming language", that is you have a stack, you can use command to modify the stack, and you can read and print from the terminal.
 
 Every command comes in a pair of `color` and `action`, the **Actions** section shows how actions and colors can be mixed, with `{}` substituted with a color, and `[]` substituted with a command. Yes, `DID []?` and `[1] then [2]` are the exceptions.
 
