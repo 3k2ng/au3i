@@ -112,7 +112,7 @@ impl State {
             Color::Lime => {
                 let mut buf = String::new();
                 std::io::stdin().read_line(&mut buf).unwrap_or_default();
-                for b in buf.bytes() {
+                for b in buf.trim_end().bytes() {
                     self.stack.push_front(b);
                 }
             }
@@ -325,14 +325,42 @@ fn execute(state: &mut State, actions: &[Action]) -> Option<()> {
     Some(())
 }
 
+fn run(state: &mut State, source: &str) -> Option<()> {
+    let tokens = tokenize(source)?;
+    let actions = parse(&tokens)?;
+    execute(state, &actions)
+}
+
+fn error() {
+    println!("you sussy baka balls!");
+}
+
 fn main() {
-    // test
-    let mut state = State::new();
-    let source = "BLUE VENTED BLUE VENTED BLUE VENTED DID GREEN SUS? IMPOSTOR SUS";
-    println!("{:?}", source);
-    let tokens = tokenize(&source.to_lowercase()).unwrap();
-    println!("{:?}", tokens);
-    let actions = parse(&tokens).unwrap();
-    println!("{:?}", actions);
-    execute(&mut state, &actions);
+    let args = std::env::args().collect::<Vec<String>>();
+    if args.len() > 1 {
+        match std::fs::read_to_string(args[1].clone()) {
+            Ok(source) => {
+                let mut state = State::new();
+                if run(&mut state, &source.to_lowercase()).is_none() {
+                    error()
+                }
+            }
+            Err(_) => error(),
+        }
+    } else {
+        let mut state = State::new();
+        let mut buf = String::new();
+        while {
+            buf.clear();
+            print!(" > ");
+            std::io::Write::flush(&mut std::io::stdout()).unwrap();
+            std::io::stdin().read_line(&mut buf).is_ok()
+        } && !buf.trim_end().is_empty()
+        {
+            if run(&mut state, &buf.to_lowercase()).is_none() {
+                error()
+            }
+            std::io::Write::flush(&mut std::io::stdout()).unwrap();
+        }
+    }
 }
