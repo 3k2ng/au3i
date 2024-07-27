@@ -117,7 +117,7 @@ impl State {
                 }
             }
             Color::Impostor => {
-                print!("[");
+                print!("\n[");
                 for i in self.stack.iter() {
                     print!(" {},", i);
                 }
@@ -343,6 +343,8 @@ fn main() {
                 let mut state = State::new();
                 if run(&mut state, &source.to_lowercase()).is_none() {
                     error()
+                } else {
+                    println!();
                 }
             }
             Err(_) => error(),
@@ -359,6 +361,8 @@ fn main() {
         {
             if run(&mut state, &buf.to_lowercase()).is_none() {
                 error()
+            } else {
+                println!();
             }
             std::io::Write::flush(&mut std::io::stdout()).unwrap();
         }
